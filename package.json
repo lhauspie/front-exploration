@@ -1,0 +1,12 @@
+{
+  "name": "webpack-sample",
+  "version": "1.0.0",
+  "description": "https://www.alsacreations.com/tuto/lire/1754-debuter-avec-webpack.html",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
