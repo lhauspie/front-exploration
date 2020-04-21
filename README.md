@@ -27,6 +27,11 @@ npm install --save-dev babel-loader babel-core
 
 But it seems that babel core needs to be installed by using `@babel/core` instead of `babel-core`.
 What's the difference ? Is it a new standard to define project whith sub project ?
+=> Just RTFM: https://docs.npmjs.com/misc/scope
+```bash
+npm install [<@scope>/]<name>
+```
+
 
 ### babel-loader
 
@@ -36,4 +41,11 @@ https://www.npmjs.com/package/babel-loader
 ### @bable\polyfill
 
 This package provides polyfills necessary for a full ES2015+ environment.
+
+> As of Babel 7.4.0, this package has been deprecated in favor of directly including `core-js/stable` (to polyfill ECMAScript features)
+> and `regenerator-runtime/runtime` (needed to use transpiled generator functions)
+
+So I did that to try but I lost 1h30 to find that it was missing a `var` or `let` in my ES6 source code (src/index.js).
+
+Why everything was working well by using @babel/polyfill when it's not working with core-js ?!?!?!
 
