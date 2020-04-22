@@ -111,3 +111,12 @@ The [documentation about HMR with stylesheets](https://webpack.js.org/guides/hot
 seems to say that we only need to install `style-loader` and `css-loader` but  this documentation is talking about `.css` files, not `.scss` files.
 
 
+## Minifying the JavaScript files
+
+This tuto ask to install an additionnal dependency:
+```bash
+npm install uglifyjs-webpack-plugin --save-dev
+```
+So I decided to make some research before doing so and I was right beacause I found this [documentation about Minifying](https://webpack.js.org/guides/production/#minification) where they say:
+> Webpack v4+ will minify your code by default in `production mode.
+
