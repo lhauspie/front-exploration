@@ -50,7 +50,6 @@ So I did that to try but I lost 1h30 to find that it was missing a `var` or `let
 Why everything was working well by using @babel/polyfill when it's not working with core-js ?!?!?!
 
 
-
 ## SASS
 
 The under-steroid CSS.
@@ -74,5 +73,41 @@ deprecated extract-text-webpack-plugin@3.0.2: Deprecated. Please use https://git
 Well, it's pretty clear, no need to search :D
 
 
+## Dev Server
+
+### Webpack Dev Server
+The more I get into the tutorial, the more I ask myself, how do we ensure compatibility of addictions? Now I end up with these versions of addiction:
+```bash
+├── webpack@4.43.0
+├── webpack-cli@3.3.11
+└── webpack-dev-server@3.10.3
+```
+It seems to me that the distribution of versions is very disparate, even though we're talking about webpack.  
+How do I know these versions are compatible?  
+It's not with the small percentage of use I have that I'll be able to realize that these versions are incompatible!
+
+
+### Dev Tool
+
+In the tuto, we're pleased to add this line in the webpack.config.js:
+```JavaScript
+      devtool: "eval-source-map"
+```
+But with this line of code, the bundle grows from 126Kb to 1.18Mb.
+
+Indeed, this configuration is made to allow a fast rebuild in defavor of the size and the duration of the first build.
+
+As we're in developpment it's not so bad as long as this bundle doesn't go live.
+
+
+### CSS Hot Loader
+
+In the tuto, we're pleased to install the css-hot-loader as a dev dependency.  
+But I tried to update my `assets/stylesheets/style.scss` and the Hot Module Reload worked without this dependency.  
+May be, it's a transitive dependency of `webpack-dev-server`?
+
+Don't know and don't find the information.  
+The [documentation about HMR with stylesheets](https://webpack.js.org/guides/hot-module-replacement/#hmr-with-stylesheets)  
+seems to say that we only need to install `style-loader` and `css-loader` but  this documentation is talking about `.css` files, not `.scss` files.
 
 
