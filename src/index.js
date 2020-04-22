@@ -1,3 +1,5 @@
+require("../assets/stylesheets/styles.scss");
+
 // In replacement of @babel/polyfill
 import "core-js/stable";
 import "regenerator-runtime/runtime";
