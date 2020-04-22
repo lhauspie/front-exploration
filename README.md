@@ -49,3 +49,30 @@ So I did that to try but I lost 1h30 to find that it was missing a `var` or `let
 
 Why everything was working well by using @babel/polyfill when it's not working with core-js ?!?!?!
 
+
+
+## SASS
+
+The under-steroid CSS.
+
+I understand now why I eard some trolls about the JavaScript world that is moving too fast to follow.
+By following the tutorial, I h'av to install the `extract-text-webpack-plugin` dependency but I have a warning:
+```bash
+npm WARN deprecated extract-text-webpack-plugin@3.0.2: Deprecated. Please use https://github.com/webpack-contrib/mini-css-extract-plugin
+npm WARN extract-text-webpack-plugin@3.0.2 requires a peer of webpack@^3.1.0 but none is installed. You must install peer dependencies yourself.
+npm WARN webpack-sample@1.0.0 No repository field.
+```
+
+So by searching what's going wrong, I found that since the webpack v4 this dependency is not compatible and has to be replaced by `mini-css-extract-plugin`.
+
+OK, let's do this!
+
+Well, by copying/pasting the console log about `extract-text-webpack-plugin` I read that:
+```bash
+deprecated extract-text-webpack-plugin@3.0.2: Deprecated. Please use https://github.com/webpack-contrib/mini-css-extract-plugin
+```
+Well, it's pretty clear, no need to search :D
+
+
+
+
