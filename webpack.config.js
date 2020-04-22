@@ -7,6 +7,9 @@ let config = {
     path: path.resolve(__dirname, "./public"),
     filename: "./bundle.js"
   },
+  optimization: {
+    minimize: true
+  },
   module: {
     rules: [{
       test: /\.js$/,
@@ -14,7 +17,7 @@ let config = {
       use: {
         loader: "babel-loader",
         options: {
-          presets: ['@babel/preset-env']
+          presets: ["@babel/preset-env"]
         }
       }
     }]
