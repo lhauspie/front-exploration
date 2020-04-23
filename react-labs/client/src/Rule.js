@@ -1,4 +1,5 @@
 import React from 'react';
+import './Rule.css';
 
 export default class Rule extends React.Component {
 
