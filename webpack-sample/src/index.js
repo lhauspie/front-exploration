@@ -27,4 +27,4 @@ for (let i of range(0, 10)) {
   console.log(a + i);
 }
 
-document.write(a);
+document.write("<dive class='element'>" + a + "</div>");

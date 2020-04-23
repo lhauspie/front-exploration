@@ -1,0 +1,9 @@
+.element {
+  color: yellow;
+  background: red;
+  display: block;
+  width: 610px;
+  height: 200px;
+  padding: 0;
+  margin: 0;
+}

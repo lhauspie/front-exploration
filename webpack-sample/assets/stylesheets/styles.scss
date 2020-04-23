@@ -1,7 +1,8 @@
-$midnight-blue : #2c3e50;
+@import 'commons.scss';
+@import 'element.css';
 
 body {
-  background-color: $midnight-blue;
+  color: orange;
 }
 
 

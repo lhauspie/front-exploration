@@ -6,7 +6,7 @@ module.exports = {
   entry: ["./src/index.js"],
   output: {
     path: path.resolve(__dirname, "./public"),
-    filename: "./bundle.js"
+    filename: "./bundle.js",
   },
   module: {
     rules: [
@@ -16,20 +16,20 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["@babel/preset-env"]
+            presets: ["@babel/preset-env"],
           }
-        }
+        },
       },
       {
         test: /\.scss$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader', 'postcss-loader'],
-      }
+      },
     ]
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'style.css'
+      filename: 'style.css',
     }),
-  ]
+  ],
 }
 

@@ -3,11 +3,15 @@ https://www.alsacreations.com/tuto/lire/1754-debuter-avec-webpack.html
 
 Thank's ZeFifi.
 
+
+
+
 # My notes
 
 Why do we need to install webpack *and* webpack-cli globally ???
 
 If I add the `watch` script in `package.json`, the webpack-cli needs to be installed locally !! But why ???
+
 
 
 ## Babel
@@ -39,6 +43,7 @@ This package allows transpiling JavaScript files using Babel and webpack.
 
 https://www.npmjs.com/package/babel-loader
 
+
 ### @bable\polyfill
 
 This package provides polyfills necessary for a full ES2015+ environment.
@@ -51,12 +56,13 @@ So I did that to try but I lost 1h30 to find that it was missing a `var` or `let
 Why everything was working well by using @babel/polyfill when it's not working with core-js ?!?!?!
 
 
+
 ## SASS
 
 The under-steroid CSS.
 
 I understand now why I eard some trolls about the JavaScript world that is moving too fast to follow.
-By following the tutorial, I h'av to install the `extract-text-webpack-plugin` dependency but I have a warning:
+By following the tutorial, I have to install the `extract-text-webpack-plugin` dependency but I have a warning:
 ```bash
 npm WARN deprecated extract-text-webpack-plugin@3.0.2: Deprecated. Please use https://github.com/webpack-contrib/mini-css-extract-plugin
 npm WARN extract-text-webpack-plugin@3.0.2 requires a peer of webpack@^3.1.0 but none is installed. You must install peer dependencies yourself.
@@ -72,6 +78,7 @@ Well, by copying/pasting the console log about `extract-text-webpack-plugin` I r
 deprecated extract-text-webpack-plugin@3.0.2: Deprecated. Please use https://github.com/webpack-contrib/mini-css-extract-plugin
 ```
 Well, it's pretty clear, no need to search :D
+
 
 
 ## Dev Server
@@ -113,7 +120,10 @@ The [documentation about HMR with stylesheets](https://webpack.js.org/guides/hot
 seems to say that we only need to install `style-loader` and `css-loader` but  this documentation is talking about `.css` files, not `.scss` files.
 
 
-## Minifying the JavaScript files
+
+## Minification and Envs
+
+### Minifying the JavaScript files
 
 This tuto asks to install an additionnal dependency:
 ```bash
@@ -123,7 +133,7 @@ So I decided to make some research before doing so and I was right because I fou
 > Webpack v4+ will minify your code by default in `production` mode.
 
 
-## Environment Production vs Developpment
+### Environment Production vs Developpment
 
 This tuto says that we need to add a dev dependency one more time:
 ```bash
@@ -134,3 +144,16 @@ But by searching how to minify with webpack, I found this [documentation](https:
 so I will follow the guide of webpack because I think this latter is more up to date.
 
 Pretty simple, nothing bad.
+
+
+### Minify CSS files
+
+Okay, there is a chapter about minifying CSS files in the tuto, but I remember to have seen a chapter about that in this [webpack documentation page](https://webpack.js.org/guides/production/).
+So let's try the webpack version.
+
+Well, the document just says: "Go to the this [documentation](https://webpack.js.org/plugins/mini-css-extract-plugin/#minimizing-for-production)".  
+Hmmm... I already installed this dependency. So just let's try to configure Production and Developpment environnments to minimize CSS only in production mode and not in developpment mode.
+
+To dive deeper into this concept, I'll try to have 3 scss and css files because I think this example is too simple to know if it works really.
+
+Okay, everything works better than I expected.
