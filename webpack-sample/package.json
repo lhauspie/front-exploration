@@ -4,11 +4,11 @@
   "description": "https://www.alsacreations.com/tuto/lire/1754-debuter-avec-webpack.html",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test":  "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --watch --config webpack.dev.js",
-    "start": "webpack-dev-server -d --hot --config webpack.dev.js --watch",
-    "dev": "webpack --config webpack.dev.js",
-    "prod": "webpack --config webpack.prod.js"
+    "start": "webpack-dashboard -- webpack-dev-server -d --hot --config webpack.dev.js --watch",
+    "dev":   "webpack --config webpack.dev.js",
+    "prod":  "webpack --config webpack.prod.js"
   },
   "keywords": [],
   "author": "",
@@ -28,6 +28,7 @@
     "terser-webpack-plugin": "^2.3.5",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
+    "webpack-dashboard": "^3.2.0",
     "webpack-dev-server": "^3.10.3",
     "webpack-merge": "^4.2.2"
   },
