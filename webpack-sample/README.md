@@ -36,6 +36,7 @@ npm install [<@scope>/]<name>
 ### babel-loader
 
 This package allows transpiling JavaScript files using Babel and webpack.
+
 https://www.npmjs.com/package/babel-loader
 
 ### @bable\polyfill
@@ -76,7 +77,8 @@ Well, it's pretty clear, no need to search :D
 ## Dev Server
 
 ### Webpack Dev Server
-The more I get into the tutorial, the more I ask myself, how do we ensure compatibility of addictions? Now I end up with these versions of addiction:
+The more I get into the tutorial, the more I ask to myself, how do we ensure compatibility of dependencies?  
+Now I end up with these versions of dependencies:
 ```bash
 ├── webpack@4.43.0
 ├── webpack-cli@3.3.11
@@ -93,7 +95,7 @@ In the tuto, we're pleased to add this line in the webpack.config.js:
 ```JavaScript
       devtool: "eval-source-map"
 ```
-But with this line of code, the bundle grows from 126Kb to 1.18Mb.
+But with this line of code, the bundle grows from 126Kb to 1.18Mb: Why?
 
 Indeed, this configuration is made to allow a fast rebuild in defavor of the size and the duration of the first build.
 
@@ -113,12 +115,12 @@ seems to say that we only need to install `style-loader` and `css-loader` but  t
 
 ## Minifying the JavaScript files
 
-This tuto ask to install an additionnal dependency:
+This tuto asks to install an additionnal dependency:
 ```bash
 npm install uglifyjs-webpack-plugin --save-dev
 ```
-So I decided to make some research before doing so and I was right beacause I found this [documentation about Minifying](https://webpack.js.org/guides/production/#minification) where they say:
-> Webpack v4+ will minify your code by default in `production mode.
+So I decided to make some research before doing so and I was right because I found this [documentation about Minifying](https://webpack.js.org/guides/production/#minification) where they say:
+> Webpack v4+ will minify your code by default in `production` mode.
 
 
 ## Environment Production vs Developpment
