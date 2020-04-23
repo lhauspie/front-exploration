@@ -4,6 +4,13 @@ require("../assets/stylesheets/styles.scss");
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 
+if (process.env.NODE_ENV === "development") {
+  console.log('Looks like we are in development mode!');
+} else if (process.env.NODE_ENV === "production") {
+  console.log('Looks like we are in poduction mode!');
+} else {
+  console.log('Looks like we are neither in poduction or development mode!');
+}
 
 // create a generator function returning an
 // iterator to a specified range of numbers

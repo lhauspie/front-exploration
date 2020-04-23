@@ -120,3 +120,15 @@ npm install uglifyjs-webpack-plugin --save-dev
 So I decided to make some research before doing so and I was right beacause I found this [documentation about Minifying](https://webpack.js.org/guides/production/#minification) where they say:
 > Webpack v4+ will minify your code by default in `production mode.
 
+
+## Environment Production vs Developpment
+
+This tuto says that we need to add a dev dependency one more time:
+```bash
+npm install --save-dev cross-env
+```
+
+But by searching how to minify with webpack, I found this [documentation](https://webpack.js.org/guides/production/),
+so I will follow the guide of webpack because I think this latter is more up to date.
+
+Pretty simple, nothing bad.
