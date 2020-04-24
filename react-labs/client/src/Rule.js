@@ -2,15 +2,33 @@ import React from 'react';
 import './Rule.css';
 
 export default class Rule extends React.Component {
+	state = {
+		folded: false,
+	}
+
+	constructor(props) {
+		super(props);
+		// Make sure that the description is hidden by default if it is empty.
+		this.state.folded = this.props.rule.description ? false : true;
+	}
+
+	// Impossible to write a classical function (changeFoldedState() {}) because of the `this` in `this.setState`
+	changeFoldedState = () => this.setState({
+		folded : !this.state.folded,
+	});
+
 
 	render() {
+		const descriptionClassName = this.state.folded ? "hidden" : "visible";
+		const glyphiconChevronClassName = this.state.folded ? "glyphicon-chevron-up" : "glyphicon-chevron-down";
+
 		return (
 	                <div key={this.props.rule.id} className="panel panel-primary">
-	                        <div className="panel-heading" role="presentation">
+	                        <div className="panel-heading" role="presentation" onClick={this.changeFoldedState}>
 	                                {this.props.rule.title}
-	                                <i className="pull-right glyphicon glyphicon-chevron-down"></i>
+	                                <i className={"pull-right glyphicon " + glyphiconChevronClassName}></i>
 	                        </div>
-	                        <div className="panel-body">
+	                        <div className={"panel-body " + descriptionClassName}>
 	                                <p>{this.props.rule.description}</p>
 	                        </div>
 	                        <div className="panel-footer">
