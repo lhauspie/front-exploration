@@ -1,5 +1,6 @@
 import React from 'react';
 import './Rule.css';
+import LikeBtn from './LikeBtn';
 
 export default class Rule extends React.Component {
 	state = {
@@ -42,12 +43,8 @@ export default class Rule extends React.Component {
 	                                                </a>
 	                                        </div>
 	                                        <div className="btn-group btn-group-xs pull-right">
-	                                                <a className="btn btn-default" title="+1">
-	                                                        {this.props.rule.likes} <i className="glyphicon glyphicon-thumbs-up"></i>
-	                                                </a>
-	                                                <a className="btn btn-default" title="-1">
-	                                                        {this.props.rule.dislikes} <i className="glyphicon glyphicon-thumbs-down"></i>
-	                                                </a>
+							<LikeBtn type={LikeBtn.types.like} likes={this.props.rule.likes}/>
+							<LikeBtn type={LikeBtn.types.dislike} likes={this.props.rule.dislikes}/>
 	                                        </div>
 	                                </div>
 	                        </div>
