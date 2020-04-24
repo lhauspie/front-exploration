@@ -1,52 +1,33 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+/**
+ * Display a like (or dislike) button.
+ * This button is initialized with a type (set on component props):
+ * - If type is "up", then a click on this button will increment counter.
+ * - If type is "down", then a click on this button will decrement counter.
+ */
 
-const types = {
-	like: 'like',
-	dislike: 'dislike',
-}
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 
-const typesValues = {
-	like: {
-		className: 'glyphicon-thumbs-up',
-		title: '+1',
-	},
-	dislike: {
-		className: 'glyphicon-thumbs-down',
-		title: '-1',
-	},
-}
-
-export default class LikeBtn extends React.Component {
-        state = {
-                likes: 0,
-        }
-
-	constructor(props) {
-		super(props);
-		this.state.likes = props.likes;
-	}
-
-	increaseLikes = () => {
-		this.setState({
-			likes: this.state.likes + 1,
-		});
-	}
-
-	render() {
-		var values = typesValues[this.props.type];
-		return (
-	                <a className="btn btn-default" title={values.title} onClick={this.increaseLikes}>
-	                        {this.state.likes} <i className={"glyphicon " + values.className}></i>
-	                </a>
-		)
-	}
-}
-
-LikeBtn.propTypes = {
-	likes: PropTypes.number.isRequired,
-	type: PropTypes.oneOf(Object.keys(types)).isRequired,
+const LikeBtn = ({ type, counter: initialCount }) => {
+  const [counter, setCounter] = useState(initialCount);
+  const increment = () => {
+    setCounter(prev => prev + 1);
+  };
+  const title = type === "up" ? "+1" : "-1";
+  return (
+    <button className="btn btn-default" title={title} onClick={increment}>
+      {counter} <i className={`glyphicon glyphicon-thumbs-${type}`}/>
+    </button>
+  );
 };
 
-LikeBtn.types = types;
+LikeBtn.defaultProps = {
+  counter: 0
+};
 
+LikeBtn.propTypes = {
+  type: PropTypes.oneOf(["up", "down"]).isRequired,
+  counter: PropTypes.number
+};
+
+export default LikeBtn;

@@ -1,25 +1,29 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Rule from './Rule';
+/**
+ * Display list of rules.
+ * The rules are provided under the key `rules` in
+ * the component props.
+ */
 
+import React, { Fragment } from "react";
+import PropTypes from "prop-types";
+import Rule from "./Rule";
 
-export default class RuleList extends React.Component {
-	render() {
-		return (
-			<div>
-			{this.props.rules.map(item =>
-				<Rule key={item.id} 
-					title={item.title}
-					description={item.description}
-					tags={item.tags}
-					likes={item.likes}
-					dislikes={item.dislikes}/>
-			)}
-			</div>
-		)
-	}
-}
+const RuleList = ({ rules }) => {
+  const newRules = rules.map(rule => <Rule key={rule.id} rule={rule} />);
+
+  return <Fragment>{newRules}</Fragment>;
+};
+
+Rule.defaultProps = {
+  rules: []
+};
 
 RuleList.propTypes = {
-	rules: PropTypes.array.isRequired,
-}
+  rules: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired
+    })
+  ).isRequired
+};
+
+export default RuleList;
