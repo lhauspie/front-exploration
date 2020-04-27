@@ -1,25 +1,16 @@
 import React from 'react';
 import { render, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
+import renderWithRedux from '../util/render-with-redux';
 
 import rules from "../data.json";
 import RuleList from "../RuleList";
-
-// these imports are made to test RuleList with the integration of Redux
-import { createStore, combineReducers } from "redux";
-import rulesReducer from "../reducers/rules-reducer";
-import { Provider } from 'react-redux';
-
-const rootReducer = combineReducers({
-  rules: rulesReducer
-});
 
 describe('RuleList', function() {
     let renderedRuleList;
 
 	beforeEach(function() {
-        const store = createStore(rootReducer, {rules: []});
-		renderedRuleList = render(<Provider store={store}><RuleList /></Provider>);
+		renderedRuleList = renderWithRedux(<RuleList />, {rules: []});
 	});
 
 	afterEach(cleanup);
