@@ -1,11 +1,6 @@
 import React from 'react';
 import { fireEvent, render, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-// import "@testing-library/react/cleanup-after-each";
-
-import ReactDOM from 'react-dom';
-// import TestUtils from 'react-dom/test-utils';
-// import {render} from 'react-testing-library';
 
 import LikeBtn from '../LikeBtn';
 

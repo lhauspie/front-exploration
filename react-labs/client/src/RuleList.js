@@ -4,14 +4,23 @@
  * the component props.
  */
 
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
+import { connect } from 'react-redux';
 import Rule from "./Rule";
+import { loadRules } from "./actions/rules-actions.js";
 
-const RuleList = ({ rules }) => {
-  const newRules = rules.map(rule => <Rule key={rule.id} rule={rule} />);
+const RuleList = ({ rules, fetchRules }) => {
+	useEffect(
+		() => {
+		    // Call `this.props.fetchRules` in the `componentDidMount` function of the RuleList component.
+			fetchRules();
+		},
+		[fetchRules]
+	);
 
-  return <Fragment>{newRules}</Fragment>;
+    const newRules = rules.map(rule => <Rule key={rule.id} rule={rule} />);
+    return <Fragment>{newRules}</Fragment>;
 };
 
 Rule.defaultProps = {
@@ -26,4 +35,17 @@ RuleList.propTypes = {
   ).isRequired
 };
 
-export default RuleList;
+const mapStateToProps = (state, props) => ({
+    rules: state.rules,
+});
+
+const mapDispatchToProps = (dispatch, props) => ({
+    fetchRules: () => {
+        dispatch(loadRules());
+    }
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RuleList);
