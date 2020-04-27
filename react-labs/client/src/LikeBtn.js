@@ -17,7 +17,7 @@ const LikeBtn = ({ type, counter: initialCount }) => {
 
 	useEffect(
 		() => {
-			console.log("LikeBtn mounted");
+			// console.log("LikeBtn mounted");
 		},
 		[]
 	);

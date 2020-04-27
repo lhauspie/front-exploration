@@ -26,7 +26,7 @@ const Rule = ({ rule: { title, description, likes, dislikes, tags } }) => {
           className={`pull-right glyphicon glyphicon-chevron-${cssFolded}`}
         ></i>
       </div>
-      <div className={`panel-body ${folded ? "hidden" : ""}`}>
+      <div data-testid="description" className={`panel-body ${folded ? "hidden" : ""}`}>
         <p>{description}</p>
       </div>
       <div className="panel-footer">
