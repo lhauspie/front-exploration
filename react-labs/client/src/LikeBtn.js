@@ -5,22 +5,23 @@
  * - If type is "down", then a click on this button will decrement counter.
  */
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import { connect } from 'react-redux';
+import { doLike, doDislike } from "./actions/like-actions.js";
 
-const LikeBtn = ({ type, counter: initialCount }) => {
-	const [counter, setCounter] = useState(initialCount);
+const LikeBtn = ({ type, rules, ruleId, like, dislike }) => {
+    const rule = rules.find(rule => rule.id === ruleId);
+    const isUp = type === "up";
 	const increment = () => {
-		setCounter(prev => prev + 1);
+	    if (isUp) {
+	        like();
+	    } else {
+	        dislike();
+	    }
 	};
-	const title = type === "up" ? "+1" : "-1";
-
-	useEffect(
-		() => {
-			// console.log("LikeBtn mounted");
-		},
-		[]
-	);
+	const title = isUp ? "+1" : "-1";
+	const counter = isUp ? rule.likes : rule.dislikes;
 
 	return (
 		<button className="btn btn-default" title={title} onClick={increment}>
@@ -38,4 +39,20 @@ LikeBtn.propTypes = {
 	counter: PropTypes.number
 };
 
-export default LikeBtn;
+const mapStateToProps = (state, props) => ({
+    rules: state.rules,
+});
+
+const mapDispatchToProps = (dispatch, props) => ({
+    like: () => {
+        dispatch(doLike(props.ruleId));
+    },
+    dislike: () => {
+        dispatch(doDislike(props.ruleId));
+    },
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LikeBtn);

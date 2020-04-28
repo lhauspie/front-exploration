@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 import LikeBtn from "./LikeBtn";
 import "./Rule.css";
 
-const Rule = ({ rule: { title, description, likes, dislikes, tags } }) => {
+const Rule = ({ rule: { id, title, description, likes, dislikes, tags } }) => {
   const newTags = tags.map(tag => (
     <span key={tag} className="badge">
       {tag}
@@ -38,8 +38,8 @@ const Rule = ({ rule: { title, description, likes, dislikes, tags } }) => {
             </button>
           </div>
           <div className="btn-group btn-group-xs pull-right">
-            <LikeBtn type="up" counter={likes} />
-            <LikeBtn type="down" counter={dislikes} />
+            <LikeBtn type="up" counter={likes} ruleId={id} />
+            <LikeBtn type="down" counter={dislikes} ruleId={id} />
           </div>
         </div>
       </div>

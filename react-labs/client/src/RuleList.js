@@ -8,15 +8,15 @@ import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import Rule from "./Rule";
-import { loadRules } from "./actions/rules-actions.js";
+import { doLoadRules } from "./actions/rules-actions.js";
 
-const RuleList = ({ rules, fetchRules }) => {
+const RuleList = ({ rules, loadRules }) => {
 	useEffect(
 		() => {
 		    // Call `this.props.fetchRules` in the `componentDidMount` function of the RuleList component.
-			fetchRules();
+			loadRules();
 		},
-		[fetchRules]
+		[loadRules]
 	);
 
     const newRules = rules.map(rule => <Rule key={rule.id} rule={rule} />);
@@ -40,8 +40,8 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
-    fetchRules: () => {
-        dispatch(loadRules());
+    loadRules: () => {
+        dispatch(doLoadRules());
     }
 });
 

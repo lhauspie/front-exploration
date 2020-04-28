@@ -1,14 +1,15 @@
 import React from "react";
-import { fireEvent, render, cleanup } from "@testing-library/react";
+import { fireEvent, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
+import renderWithRedux from '../util/render-with-redux';
 
 import Rule from "../Rule";
+import rules from "../data.json";
 
 describe("Rule with description", function() {
 	let renderedRule;
-
 	beforeEach(function() {
-		renderedRule = render(<Rule rule={ruleData} />);
+		renderedRule = renderWithRedux(<Rule rule={ruleData} />, {initialState: {rules}});
 	});
 
 	afterEach(cleanup);
@@ -35,12 +36,12 @@ describe("Rule with description", function() {
 	it("should render a like button", function() {
 		const likeBtnElement = renderedRule.getByTitle("+1");
 		expect(likeBtnElement).toBeInTheDocument();
-        });
+    });
 
-        it("should render a dislike button", function() {
+    it("should render a dislike button", function() {
 		const dislikeBtnElement = renderedRule.getByTitle("-1");
 		expect(dislikeBtnElement).toBeInTheDocument();
-        });
+    });
 
 	it("should display rule tags", () => {
 		ruleData.tags.forEach(tag => {
@@ -73,7 +74,7 @@ describe("Rule without description", function() {
 	let renderedRule;
 
 	beforeEach(function() {
-		renderedRule = render(<Rule rule={ruleData} />);
+		renderedRule = renderWithRedux(<Rule rule={ruleData} />, {initialState: {rules}});
 	});
 
 	afterEach(cleanup);
@@ -90,7 +91,7 @@ describe("Rule without description", function() {
 		// As the rule.description is undefined, we can't getByText(rule.description),
 		// so we use getByTestId (even if not recommended) and use data-testid="description"  on the div we want to test
 		const descriptionElement = renderedRule.getByTestId("description");
-                expect(descriptionElement).toHaveClass("hidden");
+        expect(descriptionElement).toHaveClass("hidden");
 	});
 
 	it("should show empty description when clicking on title", function() {
