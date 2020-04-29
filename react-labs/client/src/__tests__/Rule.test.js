@@ -1,7 +1,7 @@
 import React from "react";
 import { fireEvent, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import renderWithRedux from '../util/render-with-redux';
+import renderWithRedux from "../util/render-with-redux";
 
 import Rule from "../Rule";
 import rules from "../data.json";
@@ -90,12 +90,12 @@ describe("Rule without description", function() {
 	it("should hide description by deault", function() {
 		// As the rule.description is undefined, we can't getByText(rule.description),
 		// so we use getByTestId (even if not recommended) and use data-testid="description"  on the div we want to test
-		const descriptionElement = renderedRule.getByTestId("description");
+		const descriptionElement = renderedRule.getByTestId("rule_description");
         expect(descriptionElement).toHaveClass("hidden");
 	});
 
 	it("should show empty description when clicking on title", function() {
-		const descriptionElement = renderedRule.getByTestId("description");
+		const descriptionElement = renderedRule.getByTestId("rule_description");
 		expect(descriptionElement).toHaveClass("hidden");
 		const titleElement = renderedRule.getByText(ruleData.title);
 		fireEvent.click(titleElement);
@@ -103,7 +103,7 @@ describe("Rule without description", function() {
 	});
 
 	it("should hide again description when clicking twice on title", function() {
-		const descriptionElement = renderedRule.getByTestId("description");
+		const descriptionElement = renderedRule.getByTestId("rule_description");
 		expect(descriptionElement).toHaveClass("hidden");
 		const titleElement = renderedRule.getByText(ruleData.title);
 		fireEvent.click(titleElement);

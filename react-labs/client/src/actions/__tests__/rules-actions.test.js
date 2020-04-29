@@ -1,20 +1,33 @@
-import { RULES_LOADED, doLoadRules } from '../rules-actions.js';
+import _ from "lodash";
+import { RULES_LOADED, doLoadRules } from "../rules-actions.js";
 import "@testing-library/jest-dom/extend-expect";
-import rules from '../../data.json';
+import mockAxios from "axios"; // overriden by the /__mocks__/axios.js
 
-describe('doLoadRules', function() {
-    it('should return an action of type RULES_LOADED', function() {
-        const action = doLoadRules();
-        expect(action.type).toEqual(RULES_LOADED);
+import rules from "../../data.json";
+
+jest.mock("axios");
+
+describe("doLoadRules", function() {
+    let data;
+    let dispatch;
+
+    beforeAll(() => {
+        data = _.cloneDeep(rules);
     });
 
-    it('should return an action containing 4 rules', function() {
-        const action = doLoadRules();
-        expect(action.rules).toHaveLength(4);
+    beforeEach(() => {
+        dispatch = jest.fn();
+        mockAxios.get.mockImplementationOnce(() => ({
+                data: _.cloneDeep(rules),
+            })
+        );
     });
 
-    it('should return an action with rules that contains the data.json', function() {
-        const action = doLoadRules();
-        expect(action.rules).toEqual(rules);
+    it("should return an action of type RULES_LOADED with all the rules", async function() {
+        await doLoadRules()(dispatch);
+        expect(dispatch).toBeCalledWith({
+            type: "RULES_LOADED",
+            rules: data,
+        });
     });
 })

@@ -1,5 +1,5 @@
-import { RULES_LOADED } from '../actions/rules-actions';
-import { DO_LIKE, DO_DISLIKE } from '../actions/like-actions';
+import { RULES_LOADED } from "../actions/rules-actions";
+import { DO_LIKE, DO_DISLIKE } from "../actions/like-actions";
 
 const initialState = [];
 

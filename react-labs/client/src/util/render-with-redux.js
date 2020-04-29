@@ -1,21 +1,32 @@
 import React from "react";
-import { Provider } from "react-redux";
-import { createStore, combineReducers } from "redux";
-import { render } from "@testing-library/react";
+import { combineReducers, createStore, applyMiddleware, compose } from "redux";
 import rulesReducer from "../reducers/rules-reducer";
+import thunk from "redux-thunk";
+
+import { render } from "@testing-library/react";
+import { Provider } from "react-redux";
 
 const rootReducer = combineReducers({
-  rules: rulesReducer
+    rules: rulesReducer,
 });
 
+const middleware = applyMiddleware(
+	thunk
+);
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const renderWithRedux = (
-  ui,
-  { initialState, store = createStore(rootReducer, initialState) } = {}
+    ui,
+    {
+        initialState,
+        store = createStore(rootReducer, initialState, composeEnhancers(middleware))
+    } = {}
 ) => {
-  return {
-    ...render(<Provider store={store}>{ui}</Provider>),
-    store
-  };
+    return {
+        ...render(<Provider store={store}>{ui}</Provider>),
+        store
+    };
 };
 
 export default renderWithRedux;

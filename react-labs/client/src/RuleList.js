@@ -6,7 +6,7 @@
 
 import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import Rule from "./Rule";
 import { doLoadRules } from "./actions/rules-actions.js";
 
@@ -41,6 +41,7 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = (dispatch, props) => ({
     loadRules: () => {
+        // the thunk middleware is avoiding us to write doLoadRules()(dispatch);
         dispatch(doLoadRules());
     }
 });

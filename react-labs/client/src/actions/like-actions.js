@@ -4,8 +4,8 @@
  * - Like: increase the counter of like.
  * - Dislike: increase the counter of dislike.
  */
-export const DO_LIKE = 'DO_LIKE';
-export const DO_DISLIKE = 'DO_DISLIKE';
+export const DO_LIKE = "DO_LIKE";
+export const DO_DISLIKE = "DO_DISLIKE";
 
 function action(type, ruleId) {
     return {

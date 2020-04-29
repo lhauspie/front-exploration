@@ -1,19 +1,42 @@
-import React from 'react';
+import React from "react";
+import _ from "lodash";
 import { render, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import renderWithRedux from '../util/render-with-redux';
+import renderWithRedux from "../util/render-with-redux";
 
 import rules from "../data.json";
 import RuleList from "../RuleList";
 
-describe('RuleList', function() {
+import {
+    doLoadRules as mockDoLoadRules,
+} from "../actions/rules-actions"
+import mockRules from "../data.json";
+
+// as we mock all the rules-actions file, we have to redefine everything is needed, even RULES_LOADED to match the reducer switch/case
+jest.mock("../actions/rules-actions", () => {
+    return {
+        RULES_LOADED: "RULES_LOADED",
+        doLoadRules: jest.fn(() => async dispatch => {
+            Promise.resolve();
+            dispatch({
+                type: "RULES_LOADED",
+                rules: mockRules,
+            });
+        }),
+    }
+});
+
+describe("RuleList", function() {
     let renderedRuleList;
 
 	beforeEach(function() {
-		renderedRuleList = renderWithRedux(<RuleList />, {rules: []});
+		renderedRuleList = renderWithRedux(<RuleList />);
 	});
 
-	afterEach(cleanup);
+    afterEach(() => {
+        cleanup();
+        mockDoLoadRules.mockClear();
+    });
 
 	it("should display rules titles", () => {
 		rules.forEach(rule => {
