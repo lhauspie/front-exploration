@@ -12,6 +12,7 @@ const Layout = () => {
                 <div className="container">
                     <Route exact path="/" component={RuleList} />
                     <Route exact path="/new" component={RuleForm} />
+                    <Route exact path="/edit/:id" component={RuleForm} />
                 </div>
             </div>
         </div>

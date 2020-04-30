@@ -1,8 +1,9 @@
 import React from "react";
 import RuleTitleField from "./RuleTitleField";
 import RuleDescriptionField from "./RuleDescriptionField";
+import { connect } from "react-redux";
 
-const RuleForm = () => {
+const RuleForm = ({ rule }) => {
     return (
         <div className="panel panel-primary">
             <div className="panel-heading">
@@ -10,8 +11,8 @@ const RuleForm = () => {
             </div>
             <div className="panel-body">
                 <form>
-                    <RuleTitleField />
-                    <RuleDescriptionField />
+                    <RuleTitleField title={rule.title} />
+                    <RuleDescriptionField description={rule.description} />
                     <button type="submit" className="btn btn-primary pull-right">Submit</button>
                 </form>
             </div>
@@ -19,4 +20,21 @@ const RuleForm = () => {
     );
 };
 
-export default RuleForm;
+RuleForm.defaultProps = {
+    rule: {}
+};
+
+const mapStateToProps = (state, props) => {
+    const ruleId = Number(props.match.params.id);
+    return {
+        rule: state.rules.find(rule => rule.id === ruleId),
+    };
+};
+
+const mapDispatchToProps = (dispatch, props) => ({
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RuleForm);

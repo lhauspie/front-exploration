@@ -11,7 +11,7 @@ export const DO_DISLIKE = "DO_DISLIKE";
 
 export function doLike(ruleId) {
     return async dispatch => {
-        const response = await axios.post(`/rest/rules/${ruleId}/likes`);
+        await axios.post(`/rest/rules/${ruleId}/likes`);
         dispatch({
             type: DO_LIKE,
             ruleId,
@@ -21,7 +21,7 @@ export function doLike(ruleId) {
 
 export function doDislike(ruleId) {
     return async dispatch => {
-        const response = await axios.post(`/rest/rules/${ruleId}/dislikes`);
+        await axios.post(`/rest/rules/${ruleId}/dislikes`);
         dispatch({
             type: DO_DISLIKE,
             ruleId,
