@@ -3,18 +3,28 @@ import RuleTitleField from "./RuleTitleField";
 import RuleDescriptionField from "./RuleDescriptionField";
 import { connect } from "react-redux";
 
+import { Formik, Form, Field } from "formik";
+
+
 const RuleForm = ({ rule }) => {
+    const initialValues = {
+        id: rule.id,
+        title: rule.title || "",
+        description: rule.description || "",
+    };
     return (
         <div className="panel panel-primary">
             <div className="panel-heading">
                 <h3 className="panel-title">New rule</h3>
             </div>
             <div className="panel-body">
-                <form>
-                    <RuleTitleField title={rule.title} />
-                    <RuleDescriptionField description={rule.description} />
-                    <button type="submit" className="btn btn-primary pull-right">Submit</button>
-                </form>
+                <Formik initialValues={initialValues}>
+                    <Form>
+                        <Field name="title" component={RuleTitleField} />
+                        <Field name="description" component={RuleDescriptionField} />
+                        <button type="submit" className="btn btn-primary pull-right">Submit</button>
+                    </Form>
+                </Formik>
             </div>
         </div>
     );

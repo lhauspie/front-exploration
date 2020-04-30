@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const RuleDescriptionField = ({ description }) => {
+const RuleDescriptionField = ({ field }) => {
     return (
         <div className="form-group">
             <label htmlFor="rule-desc">Description</label>
-            <textarea className="form-control" id="rule-desc" placeholder="Description" defaultValue={description} />
+            <textarea {...field} className="form-control" id="rule-desc" placeholder="Description" />
         </div>
     );
 };
