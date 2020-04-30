@@ -6,7 +6,33 @@ import rules from "../data.json";
 
 import LikeBtn from "../LikeBtn";
 
+jest.mock("../actions/like-actions", () => {
+    return {
+        DO_LIKE: "DO_LIKE",
+        DO_DISLIKE: "DO_DISLIKE",
+        doLike: (ruleId) => {
+            return async dispatch => {
+                Promise.resolve();
+                dispatch({
+                    type: "DO_LIKE",
+                    ruleId,
+                });
+            };
+        },
+        doDislike: (ruleId) => {
+            return async dispatch => {
+                Promise.resolve();
+                dispatch({
+                    type: "DO_DISLIKE",
+                    ruleId,
+                });
+            };
+        },
+    }
+});
+
 describe("LikeBtn", function() {
+
 	afterEach(cleanup);
 
     it("should render a like button component", function() {
@@ -16,13 +42,13 @@ describe("LikeBtn", function() {
 	});
 
     it("should render a dislike button component", function() {
-        const renderedLikeBtn = renderWithRedux(< LikeBtn type="down" ruleId={1} />, {initialState: {rules}});
+        const renderedLikeBtn = renderWithRedux(<LikeBtn type="down" ruleId={1} />, {initialState: {rules}});
         const buttonElement = renderedLikeBtn.getByRole("button");
         expect(buttonElement.title).toEqual("-1")
     });
 
 	it("should increment counter when clicked like button", function() {
-		const renderedLikeBtn = renderWithRedux(<LikeBtn type="up" ruleId={1} />, {initialState: {rules}});
+		const renderedLikeBtn = renderWithRedux(< LikeBtn type="up" ruleId={1} />, {initialState: {rules}});
 		const likeButtonElement = renderedLikeBtn.getByTitle("+1");
 		expect(likeButtonElement).toHaveTextContent("0");
 		fireEvent.click(likeButtonElement);

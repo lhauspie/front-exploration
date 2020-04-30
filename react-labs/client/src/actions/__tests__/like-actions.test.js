@@ -1,27 +1,42 @@
 import { DO_LIKE, DO_DISLIKE, doLike, doDislike } from "../like-actions.js";
 import "@testing-library/jest-dom/extend-expect";
 import rules from "../../data.json";
+import mockAxios from "axios";
+
+jest.mock("axios");
 
 describe("doLike", function() {
-    it("should return an action of type DO_LIKE", function() {
-        const action = doLike();
-        expect(action.type).toEqual(DO_LIKE);
+    const dispatch = jest.fn();
+    beforeEach(() => {
+        dispatch.mockClear();
+        mockAxios.post.mockImplementationOnce(() => ({
+            ok: true,
+        }));
     });
 
-    it("should return an action containing the good ruleId", function() {
-        const action = doLike(1);
-        expect(action.ruleId).toEqual(1);
+    it("should return an action of type DO_LIKE containing the good ruleId", async function() {
+        await doLike(1)(dispatch);
+        expect(dispatch).toBeCalledWith({
+            type: DO_LIKE,
+            ruleId: 1,
+        });
     });
 });
 
 describe("doDislike", function() {
-    it("should return an action of type DO_DISLIKE", function() {
-        const action = doDislike();
-        expect(action.type).toEqual(DO_DISLIKE);
+    let dispatch;
+    beforeEach(() => {
+        dispatch = jest.fn();
+        mockAxios.post.mockImplementationOnce(() => ({
+            ok: true,
+        }));
     });
 
-    it("should return an action containing the good ruleId", function() {
-        const action = doDislike(1);
-        expect(action.ruleId).toEqual(1);
+    it("should return an action of type DO_DISLIKE containing the good ruleId", async function() {
+        await doDislike(1)(dispatch);
+        expect(dispatch).toBeCalledWith({
+            type: DO_DISLIKE,
+            ruleId: 1,
+        });
     });
 });

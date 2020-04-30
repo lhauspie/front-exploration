@@ -7,13 +7,6 @@ import Rule from "../Rule";
 import rules from "../data.json";
 
 describe("Rule with description", function() {
-	let renderedRule;
-	beforeEach(function() {
-		renderedRule = renderWithRedux(<Rule rule={ruleData} />, {initialState: {rules}});
-	});
-
-	afterEach(cleanup);
-
 	const ruleData = {
 		"id": 1,
 		"title": "TITLE",
@@ -22,6 +15,13 @@ describe("Rule with description", function() {
 		"dislikes": 0,
 		"tags": ["TAG1", "TAG2"]
 	};
+
+	let renderedRule;
+	beforeEach(function() {
+		renderedRule = renderWithRedux(<Rule rule={ruleData} />, {initialState: {rules}});
+	});
+
+	afterEach(cleanup);
 
 	it("should render rule.title", function() {
 		const titleElement = renderedRule.getByText(ruleData.title);

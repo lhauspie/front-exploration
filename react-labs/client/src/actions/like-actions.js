@@ -4,19 +4,27 @@
  * - Like: increase the counter of like.
  * - Dislike: increase the counter of dislike.
  */
+import axios from "axios";
+
 export const DO_LIKE = "DO_LIKE";
 export const DO_DISLIKE = "DO_DISLIKE";
 
-function action(type, ruleId) {
-    return {
-        type,
-        ruleId,
-    };
-}
 export function doLike(ruleId) {
-    return action(DO_LIKE, ruleId);
+    return async dispatch => {
+        const response = await axios.post(`/rest/rules/${ruleId}/likes`);
+        dispatch({
+            type: DO_LIKE,
+            ruleId,
+        });
+    };
 }
 
 export function doDislike(ruleId) {
-    return action(DO_DISLIKE, ruleId);
+    return async dispatch => {
+        const response = await axios.post(`/rest/rules/${ruleId}/dislikes`);
+        dispatch({
+            type: DO_DISLIKE,
+            ruleId,
+        });
+    };
 }
