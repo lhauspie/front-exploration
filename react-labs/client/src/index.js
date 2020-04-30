@@ -6,10 +6,14 @@ import RuleList from "./RuleList";
 import { Provider } from "react-redux";
 import store from "./store/app-store";
 
+import { BrowserRouter, Route} from "react-router-dom";
+
 const domElement = document.getElementById("root");
 const reactElement =
     <Provider store={store}>
-        <RuleList rules={[]} />
+        <BrowserRouter>
+            <Route path="/" component={RuleList} />
+        </BrowserRouter>
     </Provider>
 ;
 
