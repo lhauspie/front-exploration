@@ -5,6 +5,8 @@ import thunk from "redux-thunk";
 
 import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
+// to support <Link> tags : Error: Invariant failed: You should not use <Link> outside a <Router>
+import { BrowserRouter } from "react-router-dom";
 
 const rootReducer = combineReducers({
     rules: rulesReducer,
@@ -24,7 +26,13 @@ const renderWithRedux = (
     } = {}
 ) => {
     return {
-        ...render(<Provider store={store}>{ui}</Provider>),
+        ...render(
+            <Provider store={store}>
+                <BrowserRouter>
+                    {ui}
+                </BrowserRouter>
+            </Provider>
+        ),
         store
     };
 };
