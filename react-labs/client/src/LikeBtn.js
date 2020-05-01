@@ -10,18 +10,12 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { doLike, doDislike } from "./actions/like-actions.js";
 
-const LikeBtn = ({ type, rules, ruleId, like, dislike }) => {
-    const rule = rules.find(rule => rule.id === ruleId);
+const LikeBtn = ({ type, counter, like, dislike }) => {
     const isUp = type === "up";
 	const increment = () => {
-	    if (isUp) {
-	        like();
-	    } else {
-	        dislike();
-	    }
+	    isUp ? like() : dislike();
 	};
 	const title = isUp ? "+1" : "-1";
-	const counter = isUp ? rule.likes : rule.dislikes;
 
 	return (
 		<button className="btn btn-default" title={title} onClick={increment}>
@@ -39,9 +33,18 @@ LikeBtn.propTypes = {
 	counter: PropTypes.number
 };
 
-const mapStateToProps = (state, props) => ({
-    rules: state.rules,
-});
+const mapStateToProps = (state, props) => {
+    const rule = state.rules.find(rule => rule.id === props.ruleId);
+    const counter = props.type === "up" ? rule.likes : rule.dislikes;
+    return ({
+        // This line is the responsible of rerendering all the LikeBtn of the RuleList component when clicking one of them
+    //    rules: state.rules,
+        // So I replaced it to this next one and the LikeBtn Rendering is no more called for the other LikeBtn of the page but the one I clicked
+    //    rule: state.rules.find(rule => rule.id === props.ruleId),
+        // But we can be even more fine-grained by providing only the counter to be updated
+        counter: counter,
+    });
+};
 
 const mapDispatchToProps = (dispatch, props) => ({
     like: () => {
