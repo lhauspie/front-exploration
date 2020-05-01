@@ -6,34 +6,39 @@ import rules from "../data.json";
 
 import LikeBtn from "../LikeBtn";
 
+import {
+    doLike as mockDoLike,
+    doDislike as mockDoDislike,
+} from "../actions/like-actions";
+
 jest.mock("../actions/like-actions", () => {
     return {
         DO_LIKE: "DO_LIKE",
         DO_DISLIKE: "DO_DISLIKE",
-        doLike: (ruleId) => {
-            return async dispatch => {
-                Promise.resolve();
-                dispatch({
-                    type: "DO_LIKE",
-                    ruleId,
-                });
-            };
-        },
-        doDislike: (ruleId) => {
-            return async dispatch => {
-                Promise.resolve();
-                dispatch({
-                    type: "DO_DISLIKE",
-                    ruleId,
-                });
-            };
-        },
-    }
+        doLike: jest.fn((ruleId) => async dispatch => {
+            Promise.resolve();
+            dispatch({
+                type: "DO_LIKE",
+                ruleId,
+            });
+        }),
+        doDislike: jest.fn((ruleId) => async dispatch => {
+            Promise.resolve();
+            dispatch({
+                type: "DO_DISLIKE",
+                ruleId,
+            });
+        }),
+    };
 });
 
 describe("LikeBtn", function() {
 
-	afterEach(cleanup);
+	afterEach(() => {
+	    cleanup();
+	    mockDoLike.mockClear();
+	    mockDoDislike.mockClear();
+	});
 
     it("should render a like button component", function() {
         const renderedLikeBtn = renderWithRedux(<LikeBtn type="up" ruleId={1} />, {initialState: {rules}});

@@ -32,9 +32,9 @@ const Rule = ({ rule: { id, title, description, likes, dislikes, tags } }) => {
                 <div className="btn-toolbar">
                     {newTags}
                     <div className="btn-group btn-group-xs pull-right">
-                        <a className="btn btn-danger" title="Delete">
+                        <button className="btn btn-danger" title="Delete">
                             <i className="glyphicon glyphicon-trash"></i>
-                        </a>
+                        </button>
                     </div>
                     <div className="btn-group btn-group-xs pull-right">
                         <Link to={`/edit/${id}`} className="btn btn-primary" title="Update">

@@ -26,7 +26,7 @@ const validateDescription = (description) => {
 };
 
 
-const RuleForm = ({ rule, addRule, updateRule }) => {
+const RuleForm = ({ rule, addRule, updateRule, history }) => {
     const initialValues = {
         id: rule.id,
         title: rule.title || "",
@@ -35,9 +35,9 @@ const RuleForm = ({ rule, addRule, updateRule }) => {
 
     const handleSubmit = (rule_values) => {
         if (rule.id) {
-            updateRule(rule_values);
+            updateRule(rule_values, history);
         } else {
-            addRule(rule_values);
+            addRule(rule_values, history);
         }
     };
 
@@ -82,8 +82,8 @@ const mapStateToProps = (state, props) => {
 };
 
 const mapDispatchToProps = (dispatch, props) => ({
-    addRule: (rule) => dispatch(addRule(rule)),
-    updateRule: (rule) => dispatch(updateRule(rule)),
+    addRule: (rule, history) => dispatch(addRule(rule, history)),
+    updateRule: (rule, history) => dispatch(updateRule(rule, history)),
 });
 
 export default connect(

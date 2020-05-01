@@ -19,8 +19,7 @@ export function doLoadRules() {
     };
 };
 
-export function addRule(rule) {
-    console.log("IN THE ADD_RULE ACTION CREATOR");
+export function addRule(rule, history) {
     return async dispatch => {
         try {
             const response = await axios.post("/rest/rules", rule);
@@ -33,16 +32,14 @@ export function addRule(rule) {
         } catch (error) {
             console.error(error);
         }
+        history.push("/");
     };
 };
 
-export function updateRule(rule) {
-    console.log("IN THE UPDATE_RULE ACTION CREATOR");
+export function updateRule(rule, history) {
     return async dispatch => {
         try {
             const response = await axios.put(`/rest/rules/${rule.id}`, rule);
-            console.log("RESPONSE FROM PUT /rest/rules/:id");
-            console.log(response);
             dispatch({
                 type: UPDATE_RULE,
                 rule: response.data,
@@ -50,5 +47,6 @@ export function updateRule(rule) {
         } catch (error) {
             console.error(error);
         }
+        history.push("/");
     };
 };

@@ -9,7 +9,8 @@ import RuleList from "../RuleList";
 
 import {
     doLoadRules as mockDoLoadRules,
-} from "../actions/rules-actions"
+} from "../actions/rules-actions";
+
 import mockRules from "../data.json";
 
 // as we mock all the rules-actions file, we have to redefine everything is needed, even RULES_LOADED to match the reducer switch/case
@@ -23,7 +24,7 @@ jest.mock("../actions/rules-actions", () => {
                 rules: mockRules,
             });
         }),
-    }
+    };
 });
 
 describe("RuleList", function() {
