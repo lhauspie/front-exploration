@@ -4,6 +4,8 @@ import RuleDescriptionField from "./RuleDescriptionField";
 import { connect } from "react-redux";
 
 import { Formik, Form, Field } from "formik";
+import { addRule, updateRule } from "./actions/rules-actions";
+import isObjectEmpty from "./util/is-object-empty";
 
 const validateTitle = (title) => {
     if (title === undefined || title.length === 0) {
@@ -23,24 +25,42 @@ const validateDescription = (description) => {
     }
 };
 
-const RuleForm = ({ rule }) => {
+
+const RuleForm = ({ rule, addRule, updateRule }) => {
     const initialValues = {
         id: rule.id,
         title: rule.title || "",
         description: rule.description || "",
     };
+
+    const handleSubmit = (rule_values) => {
+        if (rule.id) {
+            updateRule(rule_values);
+        } else {
+            addRule(rule_values);
+        }
+    };
+
     return (
         <div className="panel panel-primary">
             <div className="panel-heading">
-                <h3 className="panel-title">New rule</h3>
+                <h3 className="panel-title">{rule.id ? "Edit rule" : "New rule"}</h3>
             </div>
             <div className="panel-body">
-                <Formik initialValues={initialValues}>
-                    <Form>
-                        <Field name="title" component={RuleTitleField} validate={validateTitle} />
-                        <Field name="description" component={RuleDescriptionField} validate={validateDescription} />
-                        <button type="submit" className="btn btn-primary pull-right">Submit</button>
-                    </Form>
+                <Formik
+                    initialValues={initialValues}
+                    onSubmit={handleSubmit}>
+                    {(form) => (
+                        <Form>
+                            <Field name="title" component={RuleTitleField} validate={validateTitle} />
+                            <Field name="description" component={RuleDescriptionField} validate={validateDescription} />
+                            <button type="submit"
+                                    className="btn btn-primary pull-right"
+                                    disabled={form.isSubmitting || !isObjectEmpty(form.errors) || !form.dirty}>
+                                Submit
+                            </button>
+                        </Form>
+                    )}
                 </Formik>
             </div>
         </div>
@@ -48,7 +68,10 @@ const RuleForm = ({ rule }) => {
 };
 
 RuleForm.defaultProps = {
-    rule: {}
+    rule: {
+        title: "",
+        description: "",
+    }
 };
 
 const mapStateToProps = (state, props) => {
@@ -59,6 +82,8 @@ const mapStateToProps = (state, props) => {
 };
 
 const mapDispatchToProps = (dispatch, props) => ({
+    addRule: (rule) => dispatch(addRule(rule)),
+    updateRule: (rule) => dispatch(updateRule(rule)),
 });
 
 export default connect(
